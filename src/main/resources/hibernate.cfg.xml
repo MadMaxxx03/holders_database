@@ -12,9 +12,10 @@
         <property name="show_sql">false</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping resource="Mapping/Holder.hbm.xml"></mapping>
-        <mapping resource="Mapping/PassedTest.hbm.xml"></mapping>
-        <mapping resource="Mapping/Question.hbm.xml"></mapping>
-        <mapping resource="Mapping/Test.hbm.xml"></mapping>
+        <mapping class="Classes.Holder"></mapping>
+        <mapping class="Classes.PassedTest"></mapping>
+        <mapping class="Classes.Question"></mapping>
+        <mapping class="Classes.Test"></mapping>
+
     </session-factory>
 </hibernate-configuration>

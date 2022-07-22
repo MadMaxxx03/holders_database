@@ -1,10 +1,27 @@
 package Classes;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "QUESTION")
 public class Question {
+
+    @Id
+    @Column(name = "QID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int qId;
+
+    @Column
     private String question;
+
+    @Column
     private String answer;
+
+    @Column
     private float score;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TID")
     private Test test;
 
     public Question(){

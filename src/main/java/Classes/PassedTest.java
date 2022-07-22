@@ -1,9 +1,26 @@
 package Classes;
 
+import jakarta.persistence.*;
+import org.hibernate.annotations.ManyToAny;
+
+@Entity
+@Table(name = "PASSEDTEST")
 public class PassedTest {
+
+    @Id
+    @Column(name = "PID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pId;
+
+    @Column
     private float progress;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "HID")
     private Holder holder;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TID")
     private Test test;
 
     public PassedTest(){

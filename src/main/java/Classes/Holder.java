@@ -1,14 +1,31 @@
 package Classes;
 
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "HOLDER")
 public class Holder {
+
+    @Id
+    @Column(name = "HID")
     private int hId;
+
+    @Column
     private String name;
+
+    @Column
     private String password;
+
+    @Column
     private boolean role;
+
+    @OneToMany(mappedBy = "holder", fetch = FetchType.EAGER)
     private Set<PassedTest> passedTests;
+
+    @OneToMany(mappedBy = "holder", fetch = FetchType.EAGER)
     private Set<Test> tests;
 
     public Holder(){
