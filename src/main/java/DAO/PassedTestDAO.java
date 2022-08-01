@@ -1,11 +1,22 @@
 package DAO;
 
+import Classes.Holder;
 import Classes.PassedTest;
+import org.hibernate.SessionFactory;
 
-import java.sql.SQLException;
+public class PassedTestDAO {
 
-public interface PassedTestDAO {
+    private final SessionFactory sessionFactory;
 
+    public PassedTestDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void add(PassedTest passedTest){
+        sessionFactory.getCurrentSession().save(passedTest);
+    }
+    /*
     //create
     void add(PassedTest passedTest) throws SQLException;
+    */
 }
