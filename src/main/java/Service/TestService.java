@@ -1,44 +1,20 @@
 package Service;
 
 import BL.SessionUtil;
-import BL.TransactionHelper;
 import Classes.Holder;
-import Classes.PassedTest;
 import Classes.Question;
 import Classes.Test;
-import DAO.HolderDAO;
 import DAO.TestDAO;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
-public class TestService {
+public class TestService extends SessionUtil implements TestDAO {
 
-    private final TestDAO testDAO;
-    private final TransactionHelper th;
 
-    public TestService(SessionFactory sessionFactory, TestDAO testDAO){
-        this.testDAO = testDAO;
-        this.th = new TransactionHelper(sessionFactory);
-    }
-
-    public List<Test> getAll(){
-        return th.inTransaction(testDAO::getAll);
-    }
-
-    public void add(Test test){
-        th.inTransaction(() -> testDAO.add(test));
-    }
-
-    public Set<Question> getQuestionsById(int id){
-        return th.inTransaction(() -> testDAO.getQuestionsById(id));
-    }
-
-    /*
     @Override
     public void add(Test test) throws SQLException {
         //open session with a transaction
@@ -82,5 +58,5 @@ public class TestService {
         return questions;
     }
 
-     */
+
 }

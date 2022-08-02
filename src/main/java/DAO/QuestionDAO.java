@@ -1,36 +1,16 @@
 package DAO;
 
-import Classes.Holder;
 import Classes.Question;
-import org.hibernate.SessionFactory;
+import Classes.Test;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
-public class QuestionDAO {
+public interface QuestionDAO {
 
-    private final SessionFactory sessionFactory;
-
-    public QuestionDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public void add(Question question){
-        sessionFactory.getCurrentSession().save(question);
-    }
-
-    public List<Question> getAll(){
-        return new ArrayList<Question>(sessionFactory.getCurrentSession()
-                .createQuery("from Question", Question.class)
-                .list());
-    }
-
-    /*
     //create
     void add(Question question) throws SQLException;
 
     //read
     List<Question> getAll() throws  SQLException;
-
-     */
 }

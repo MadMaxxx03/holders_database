@@ -1,43 +1,26 @@
 package Main;
 
 import BL.HibernateUtil;
-import BL.TransactionHelper;
 import Classes.Holder;
 import Classes.PassedTest;
 import Classes.Question;
 import Classes.Test;
-import DAO.HolderDAO;
-import DAO.PassedTestDAO;
-import DAO.QuestionDAO;
-import DAO.TestDAO;
 import Service.HolderService;
 import Service.PassedTestService;
 import Service.QuestionService;
 import Service.TestService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import javax.imageio.spi.ServiceRegistry;
-import java.security.Provider;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
 import java.util.*;
 
-
 public class Main {
-
     public static void main(String[] args) throws SQLException {
 
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        HolderService holderService = new HolderService(sessionFactory, new HolderDAO(sessionFactory));
-        PassedTestService passedTestService = new PassedTestService(sessionFactory, new PassedTestDAO(sessionFactory));
-        QuestionService questionService = new QuestionService(sessionFactory, new QuestionDAO(sessionFactory));
-        TestService testService = new TestService(sessionFactory, new TestDAO(sessionFactory));
-
+        HolderService holderService = new HolderService();
+        TestService testService = new TestService();
+        QuestionService questionService = new QuestionService();
+        PassedTestService passedTestService = new PassedTestService();
 
         Holder holder = new Holder();
         PassedTest passedTest = new PassedTest();
@@ -49,6 +32,7 @@ public class Main {
 
         Set<Test> tests = new HashSet<>();
         holder.setTests(tests);
+
 
         Set<Question> questions = new HashSet<>();
         test.setQuestions(questions);
@@ -290,7 +274,7 @@ public class Main {
                                             isTestId[0] = true;
                                             break;
                                         }
-                                        //holderService.closeTransactionSession();
+                                        holderService.closeTransactionSession();
                                     }
                                 }
                             }
@@ -321,7 +305,7 @@ public class Main {
                                     System.out.println("Неврено");
                                 }
                             }
-                            //testService.closeTransactionSession();
+                            testService.closeTransactionSession();
                             System.out.println("Тест пройден");
                             System.out.println("Вы набрали " + score/allScore*100 + "%");
 

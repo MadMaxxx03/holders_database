@@ -1,41 +1,20 @@
 package Service;
 
 import BL.SessionUtil;
-import BL.TransactionHelper;
 import Classes.Holder;
 import Classes.Question;
 import Classes.Test;
-import DAO.PassedTestDAO;
 import DAO.QuestionDAO;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class QuestionService {
+public class QuestionService extends SessionUtil implements QuestionDAO {
 
-    private final QuestionDAO questionDAO;
-    private final TransactionHelper th;
-
-    public QuestionService(SessionFactory sessionFactory, QuestionDAO questionDAO){
-        this.questionDAO = questionDAO;
-        this.th = new TransactionHelper(sessionFactory);
-    }
-
-    public void add(Question question){
-        th.inTransaction(() -> questionDAO.add(question));
-    }
-
-    public List<Question> getAll(){
-        return th.inTransaction(questionDAO::getAll);
-    }
-
-    /*
     @Override
     public void add(Question question) throws SQLException {
-
         //open session with a transaction
         openTransactionSession();
 
@@ -60,6 +39,4 @@ public class QuestionService {
 
         return questionList;
     }
-
-     */
 }
