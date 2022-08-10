@@ -1,7 +1,6 @@
-package Classes;
+package springApp.Classes;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.ManyToAny;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "PASSEDTEST")

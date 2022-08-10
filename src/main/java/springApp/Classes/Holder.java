@@ -1,8 +1,7 @@
-package Classes;
+package springApp.Classes;
 
-import jakarta.persistence.*;
 
-import java.util.HashSet;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity

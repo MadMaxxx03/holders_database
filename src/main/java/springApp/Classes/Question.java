@@ -1,6 +1,6 @@
-package Classes;
+package springApp.Classes;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "QUESTION")
