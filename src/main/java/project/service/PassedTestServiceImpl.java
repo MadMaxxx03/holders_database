@@ -1,17 +1,14 @@
-package springApp.Service;
+package project.service;
 
-import springApp.Classes.PassedTest;
-import springApp.DAO.PassedTestDAO;
-import springApp.Repository.PassedTestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import project.classes.PassedTest;
+import project.repository.PassedTestRepository;
 
 import java.util.List;
 
 @Service
-@Transactional
-public class PassedTestService implements PassedTestDAO {
+public class PassedTestServiceImpl implements PassedTestService {
 
     @Autowired
     private PassedTestRepository passedTestRepository;
@@ -29,11 +26,16 @@ public class PassedTestService implements PassedTestDAO {
 
     @Override
     public void update(PassedTest obj) {
-
+        passedTestRepository.save(obj);
     }
 
     @Override
     public void delete(PassedTest obj) {
         passedTestRepository.delete(obj);
+    }
+
+    @Override
+    public boolean isObjPresent(PassedTest obj) {
+        return passedTestRepository.findById(obj.getpId()).isPresent();
     }
 }

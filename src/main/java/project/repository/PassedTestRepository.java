@@ -1,6 +1,6 @@
-package springApp.Repository;
+package project.repository;
 
-import springApp.Classes.PassedTest;
+import project.classes.PassedTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package springApp.Classes;
+package project.classes;
 
 
 import javax.persistence.*;
@@ -21,10 +21,10 @@ public class Holder {
     @Column
     private boolean role;
 
-    @OneToMany(mappedBy = "holder", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY)
     private Set<PassedTest> passedTests;
 
-    @OneToMany(mappedBy = "holder", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY)
     private Set<Test> tests;
 
     public Holder(){

@@ -1,4 +1,4 @@
-package springApp.Classes;
+package project.classes;
 
 import javax.persistence.*;
 

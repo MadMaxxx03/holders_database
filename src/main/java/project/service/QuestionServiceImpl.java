@@ -1,17 +1,14 @@
-package springApp.Service;
+package project.service;
 
-import springApp.Classes.Question;
-import springApp.DAO.QuestionDAO;
-import springApp.Repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import project.classes.Question;
+import project.repository.QuestionRepository;
 
 import java.util.List;
 
 @Service
-@Transactional
-public class QuestionService implements QuestionDAO {
+public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -26,15 +23,18 @@ public class QuestionService implements QuestionDAO {
         return questionRepository.findAll();
     }
 
-
-
     @Override
     public void update(Question obj) {
-
+        questionRepository.save(obj);
     }
 
     @Override
     public void delete(Question obj) {
         questionRepository.delete(obj);
+    }
+
+    @Override
+    public boolean isObjPresent(Question obj) {
+        return questionRepository.findById(obj.getqId()).isPresent();
     }
 }
