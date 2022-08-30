@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.classes.Holder;
 import project.classes.PassedTest;
+import project.classes.PassedTestShort;
 import project.service.HolderService;
 import project.service.PassedTestService;
 import project.service.TestService;
@@ -31,8 +32,8 @@ public class PassedTestController {
     private TestService testService;
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<PassedTest>> getAll() {
-        return new ResponseEntity<>(passedTestService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<PassedTestShort>> getAll() {
+        return new ResponseEntity<>(passedTestService.getPart(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,6 +41,8 @@ public class PassedTestController {
         if(!passedTestService.isObjPresent(passedTest)
                 && holderService.isObjPresent(passedTest.getHolder())
                 && testService.isObjPresent(passedTest.getTest())){
+            passedTest.setHolder(holderService.getById(passedTest.getHolder().gethId()));
+            passedTest.setTest(testService.getById(passedTest.getTest().gettId()));
             passedTestService.save(passedTest);
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -59,6 +62,8 @@ public class PassedTestController {
         if(passedTestService.isObjPresent(passedTest)
                 && holderService.isObjPresent(passedTest.getHolder())
                 && testService.isObjPresent(passedTest.getTest())){
+            passedTest.setHolder(holderService.getById(passedTest.getHolder().gethId()));
+            passedTest.setTest(testService.getById(passedTest.getTest().gettId()));
             passedTestService.update(passedTest);
             return new ResponseEntity<>(HttpStatus.OK);
         }

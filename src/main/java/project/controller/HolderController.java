@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.classes.Holder;
+import project.classes.HolderShort;
 import project.service.HolderService;
 
 import java.util.List;
@@ -18,13 +19,12 @@ import java.util.List;
 @RequestMapping("/holder")
 public class HolderController {
 
-
     @Autowired
     private HolderService holderService;
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<Holder>> getAll() {
-        return new ResponseEntity<>(holderService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<HolderShort>> getAll() {
+        return new ResponseEntity<>(holderService.getPart(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

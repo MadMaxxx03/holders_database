@@ -1,39 +1,21 @@
 package project.classes;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.Set;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class HolderShort {
 
-@Entity
-@Table(name = "HOLDER")
-public class Holder {
-
-    @Id
-    @Column(name = "HID")
     private int hId;
 
-    @Column
     private String name;
 
-    @Column
     private String password;
 
-    @Column
     private boolean role;
-
-    @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY)
-    private Set<PassedTest> passedTests;
-
-    @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY)
-    private Set<Test> tests;
-
-    public Holder(){
-
-    }
 
     public int gethId() {
         return hId;
@@ -67,25 +49,9 @@ public class Holder {
         this.role = role;
     }
 
-    public Set getPassedTests() {
-        return passedTests;
-    }
-
-    public void setPassedTests(Set passedTests) {
-        this.passedTests = passedTests;
-    }
-
-    public Set getTests() {
-        return tests;
-    }
-
-    public void setTests(Set tests) {
-        this.tests = tests;
-    }
-
     @Override
     public String toString() {
-        return "Holder{" +
+        return "HolderShort{" +
                 "hId=" + hId +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +

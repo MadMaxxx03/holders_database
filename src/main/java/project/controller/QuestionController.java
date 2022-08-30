@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.classes.Question;
+import project.classes.QuestionShort;
 import project.service.QuestionService;
 import project.service.TestService;
 
@@ -26,13 +27,14 @@ public class QuestionController {
     private TestService testService;
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<Question>> getAll() {
-        return new ResponseEntity<>(questionService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<QuestionShort>> getAll() {
+        return new ResponseEntity<>(questionService.getPart(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<String> save(@RequestBody Question question) {
         if(!questionService.isObjPresent(question) && testService.isObjPresent(question.getTest())){
+            question.setTest(testService.getById(question.getTest().gettId()));
             questionService.save(question);
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -50,6 +52,7 @@ public class QuestionController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<String> update(@RequestBody Question question) {
         if(questionService.isObjPresent(question) && testService.isObjPresent(question.getTest())){
+            question.setTest(testService.getById(question.getTest().gettId()));
             questionService.update(question);
             return new ResponseEntity<>(HttpStatus.OK);
         }

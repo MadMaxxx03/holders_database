@@ -14,5 +14,10 @@ public interface GeneralService<T> {
 
     void delete(T obj);
 
+    T getById(int id);
+
     boolean isObjPresent(T obj);
+
+    boolean isObjSame(T obj);
+
 }
